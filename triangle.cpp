@@ -20,10 +20,9 @@ const char* Triangle(int a, int b, int c) {
   }
 
   //std::cout <<"var: " << a << b << c << std::endl;
+  if ( a < 1 || c > 200 || a + b <= c ) return "Not a triangle";
 
-  if ( a + b <= c ) return "Not a triangle";
-
-  if ( c == b && b == c ) return "Equilateral";
+  else if ( c == b && b == c ) return "Equilateral";
 
   else if ( c != b && b != a ) return "Scalene";
 
