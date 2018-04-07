@@ -29,7 +29,7 @@ CXXFLAGS += -g -Wall -Wextra -pthread
 
 # All tests produced by this Makefile.  Remember to add new tests you
 # created to the list.
-TESTS = triangle_test nextdate_test
+TESTS = triangle_test nextdate_test commission_test
 
 
 # All Google Test headers.  Usually you shouldn't change this
@@ -91,4 +91,15 @@ nextdate_test.o : $(USER_DIR)/nextdate_test.cpp \
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $(USER_DIR)/nextdate_test.cpp
 
 nextdate_test : nextdate.o nextdate_test.o gtest_main.a
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -lpthread $^ -o $@
+
+
+commission.o : $(USER_DIR)/commission.cpp $(USER_DIR)/commission.h $(GTEST_HEADERS)
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $(USER_DIR)/commission.cpp
+
+commission_test.o : $(USER_DIR)/commission_test.cpp \
+                     $(USER_DIR)/commission.h $(GTEST_HEADERS)
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $(USER_DIR)/commission_test.cpp
+
+commission_test : commission.o commission_test.o gtest_main.a
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -lpthread $^ -o $@
