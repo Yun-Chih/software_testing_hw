@@ -6,6 +6,9 @@
 const char* Commission(int lock, int stock, int barrel) {
   if (lock == -1) return "Program terminate";
 
+  if (lock < -1 || lock > 70 || stock < 1 || stock > 80 || barrel < 1 || barrel > 90)
+    return "Invalid input";
+
   int sales = lock * 45 + stock * 30 + barrel * 25;
   int commission = sales * 10;
   sales -= 1000;

@@ -17,36 +17,36 @@ TEST(CommissionTest, WeakNormal) {
 }
 
 TEST(CommissionTest, WeakRobust) { 
-  EXPECT_STREQ("Invalid inpt", Commission(-2, 40, 45));
-  EXPECT_STREQ("Invalid inpt", Commission(71, 40, 45));
-  EXPECT_STREQ("Invalid inpt", Commission(35, -1, 45));
-  EXPECT_STREQ("Invalid inpt", Commission(35, 81, 45));
-  EXPECT_STREQ("Invalid inpt", Commission(35, 40, -1));
-  EXPECT_STREQ("Invalid inpt", Commission(35, 40, 91));
+  EXPECT_STREQ("Invalid input", Commission(-2, 40, 45));
+  EXPECT_STREQ("Invalid input", Commission(71, 40, 45));
+  EXPECT_STREQ("Invalid input", Commission(35, -1, 45));
+  EXPECT_STREQ("Invalid input", Commission(35, 81, 45));
+  EXPECT_STREQ("Invalid input", Commission(35, 40, -1));
+  EXPECT_STREQ("Invalid input", Commission(35, 40, 91));
 }
 
 TEST(CommissionTest, StrongRobust) {
-  EXPECT_STREQ("Invalid inpt", Commission(-2, -1, 45));
-  EXPECT_STREQ("Invalid inpt", Commission(-2, 81, 45));
-  EXPECT_STREQ("Invalid inpt", Commission(71, -1, 45));
-  EXPECT_STREQ("Invalid inpt", Commission(71, 81, 45));
-  EXPECT_STREQ("Invalid inpt", Commission(-2, 40, -1));
-  EXPECT_STREQ("Invalid inpt", Commission(-2, 40, 91));
-  EXPECT_STREQ("Invalid inpt", Commission(71, 40, -1));
-  EXPECT_STREQ("Invalid inpt", Commission(71, 40, 91));
-  EXPECT_STREQ("Invalid inpt", Commission(35, -1, -1));
-  EXPECT_STREQ("Invalid inpt", Commission(35, -1, 91));
-  EXPECT_STREQ("Invalid inpt", Commission(35, 81, -1));
-  EXPECT_STREQ("Invalid inpt", Commission(35, 81, 91));
+  EXPECT_STREQ("Invalid input", Commission(-2, -1, 45));
+  EXPECT_STREQ("Invalid input", Commission(-2, 81, 45));
+  EXPECT_STREQ("Invalid input", Commission(71, -1, 45));
+  EXPECT_STREQ("Invalid input", Commission(71, 81, 45));
+  EXPECT_STREQ("Invalid input", Commission(-2, 40, -1));
+  EXPECT_STREQ("Invalid input", Commission(-2, 40, 91));
+  EXPECT_STREQ("Invalid input", Commission(71, 40, -1));
+  EXPECT_STREQ("Invalid input", Commission(71, 40, 91));
+  EXPECT_STREQ("Invalid input", Commission(35, -1, -1));
+  EXPECT_STREQ("Invalid input", Commission(35, -1, 91));
+  EXPECT_STREQ("Invalid input", Commission(35, 81, -1));
+  EXPECT_STREQ("Invalid input", Commission(35, 81, 91));
 
-  EXPECT_STREQ("Invalid inpt", Commission(-2, -1, -1));
-  EXPECT_STREQ("Invalid inpt", Commission(-2, -1, 91));
-  EXPECT_STREQ("Invalid inpt", Commission(-2, 81, -1));
-  EXPECT_STREQ("Invalid inpt", Commission(-2, 81, 91));
-  EXPECT_STREQ("Invalid inpt", Commission(71, -1, -1));
-  EXPECT_STREQ("Invalid inpt", Commission(71, -1, 91));
-  EXPECT_STREQ("Invalid inpt", Commission(71, 81, -1));
-  EXPECT_STREQ("Invalid inpt", Commission(71, 81, 91));
+  EXPECT_STREQ("Invalid input", Commission(-2, -1, -1));
+  EXPECT_STREQ("Invalid input", Commission(-2, -1, 91));
+  EXPECT_STREQ("Invalid input", Commission(-2, 81, -1));
+  EXPECT_STREQ("Invalid input", Commission(-2, 81, 91));
+  EXPECT_STREQ("Invalid input", Commission(71, -1, -1));
+  EXPECT_STREQ("Invalid input", Commission(71, -1, 91));
+  EXPECT_STREQ("Invalid input", Commission(71, 81, -1));
+  EXPECT_STREQ("Invalid input", Commission(71, 81, 91));
 }
 
 }
