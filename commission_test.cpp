@@ -16,7 +16,9 @@ TEST(CommissionTest, WeakNormal) {
   EXPECT_STREQ("Program terminate", Commission(-1, 0, 91));
 }
 
-TEST(CommissionTest, WeakRobust) { 
+TEST(CommissionTest, WeakRobust) {
+  EXPECT_STREQ("Invalid input", Commission(0, 40, 45)); 
+ 
   EXPECT_STREQ("Invalid input", Commission(-2, 40, 45));
   EXPECT_STREQ("Invalid input", Commission(71, 40, 45));
   EXPECT_STREQ("Invalid input", Commission(35, -1, 45));
