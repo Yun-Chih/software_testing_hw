@@ -16,12 +16,12 @@ const char* Commission(int lock, int stock, int barrel) {
   sales -= 800;
   if (sales > 0) commission += sales * 5;
   commission /= 100;
-  std::cout << commission << std::endl;
+  //std::cout << commission << std::endl;
   
   std::stringstream ss;
   ss << commission;
   std::string str = ss.str();
   
-  std::cout << str.c_str() << std::endl;
+  //std::cout << str.c_str() << std::endl;
   return str.c_str();
 }
