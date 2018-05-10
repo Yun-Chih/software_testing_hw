@@ -17,12 +17,15 @@
 GTEST_DIR = googletest
 
 # Where to find user code.
-USER_DIR = ./
+USER_DIR = .
 
 # Flags passed to the preprocessor.
 # Set Google Test's header directory as a system directory, such that
 # the compiler doesn't generate warnings in Google Test headers.
 CPPFLAGS += -isystem $(GTEST_DIR)/include
+
+# Combine with gcov
+GCOVFLAGS += -fprofile-arcs -ftest-coverage
 
 # Flags passed to the C++ compiler.
 CXXFLAGS += -g -Wall -Wextra -pthread
@@ -42,7 +45,7 @@ GTEST_HEADERS = $(GTEST_DIR)/include/gtest/*.h \
 all : $(TESTS)
 
 clean :
-	rm -f $(TESTS) gtest.a gtest_main.a *.o
+	rm -f $(TESTS) gtest.a gtest_main.a *.o *.gcno *.gcda *.gcov
 
 # Builds gtest.a and gtest_main.a.
 
@@ -73,33 +76,43 @@ gtest_main.a : gtest-all.o gtest_main.o
 # function.
 
 triangle.o : $(USER_DIR)/triangle.cpp $(USER_DIR)/triangle.h $(GTEST_HEADERS)
-	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $(USER_DIR)/triangle.cpp
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) $(GCOVFLAGS) -c $(USER_DIR)/triangle.cpp
 
 triangle_test.o : $(USER_DIR)/triangle_test.cpp \
                      $(USER_DIR)/triangle.h $(GTEST_HEADERS)
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $(USER_DIR)/triangle_test.cpp
 
 triangle_test : triangle.o triangle_test.o gtest_main.a
-	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -lpthread $^ -o $@
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) $(GCOVFLAGS) -lpthread $^ -o $@
 
 
 nextdate.o : $(USER_DIR)/nextdate.cpp $(USER_DIR)/nextdate.h $(GTEST_HEADERS)
-	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $(USER_DIR)/nextdate.cpp
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) $(GCOVFLAGS) -c $(USER_DIR)/nextdate.cpp
 
 nextdate_test.o : $(USER_DIR)/nextdate_test.cpp \
                      $(USER_DIR)/nextdate.h $(GTEST_HEADERS)
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $(USER_DIR)/nextdate_test.cpp
 
 nextdate_test : nextdate.o nextdate_test.o gtest_main.a
-	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -lpthread $^ -o $@
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) $(GCOVFLAGS) -lpthread $^ -o $@
 
 
 commission.o : $(USER_DIR)/commission.cpp $(USER_DIR)/commission.h $(GTEST_HEADERS)
-	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $(USER_DIR)/commission.cpp
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) $(GCOVFLAGS) -c $(USER_DIR)/commission.cpp
 
 commission_test.o : $(USER_DIR)/commission_test.cpp \
                      $(USER_DIR)/commission.h $(GTEST_HEADERS)
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $(USER_DIR)/commission_test.cpp
 
 commission_test : commission.o commission_test.o gtest_main.a
-	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -lpthread $^ -o $@
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) $(GCOVFLAGS) -lpthread $^ -o $@
+
+test : triangle_test nextdate_test commission_test 
+	./triangle_test
+	./nextdate_test
+	./commission_test
+
+gcov : triangle_test nextdate_test commission_test 
+	gcov triangle.gcno
+	gcov nextdate.gcno
+	gcov commission.gcno

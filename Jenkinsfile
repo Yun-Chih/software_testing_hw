@@ -12,7 +12,7 @@ pipeline {
         }
         stage('Test') {
             steps {
-                sh './triangle_test;./nextdate_test;./commission_test'
+                sh 'make test; make gcov'
             }
         }
     }
