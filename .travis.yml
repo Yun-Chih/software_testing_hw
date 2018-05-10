@@ -1,0 +1,13 @@
+language: cpp
+os:
+  - linux
+compiler:
+  - g++
+script:
+  - make
+  - ./triangle_test
+  - ./nextdate_test
+  - ./commission_test
+branches:
+  only:
+    - master
