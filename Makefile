@@ -33,7 +33,7 @@ CXXFLAGS += -g -Wall -Wextra -pthread
 # All tests produced by this Makefile.  Remember to add new tests you
 # created to the list.
 TESTS = triangle_test nextdate_test commission_test
-
+PATHTESTS = triangle_test_c0 triangle_test_c1
 
 # All Google Test headers.  Usually you shouldn't change this
 # definition.
@@ -45,7 +45,7 @@ GTEST_HEADERS = $(GTEST_DIR)/include/gtest/*.h \
 all : $(TESTS)
 
 clean :
-	rm -f $(TESTS) gtest.a gtest_main.a *.o *.gcno *.gcda *.gcov
+	rm -f $(TESTS) $(PATHTESTS) gtest.a gtest_main.a *.o *.gcno *.gcda *.gcov
 
 # Builds gtest.a and gtest_main.a.
 
@@ -116,3 +116,24 @@ gcov : triangle_test nextdate_test commission_test
 	gcov triangle.gcno
 	gcov nextdate.gcno
 	gcov commission.gcno
+
+############### path test ###################################
+triangle_test_c0.o : $(USER_DIR)/triangle_test_c0.cpp \
+                     $(USER_DIR)/triangle.h $(GTEST_HEADERS)
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $(USER_DIR)/triangle_test_c0.cpp
+
+triangle_test_c0 : triangle.o triangle_test_c0.o gtest_main.a
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) $(GCOVFLAGS) -lpthread $^ -o $@
+
+triangle_test_c1.o : $(USER_DIR)/triangle_test_c1.cpp \
+                     $(USER_DIR)/triangle.h $(GTEST_HEADERS)
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $(USER_DIR)/triangle_test_c1.cpp
+
+triangle_test_c1 : triangle.o triangle_test_c1.o gtest_main.a
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) $(GCOVFLAGS) -lpthread $^ -o $@
+
+pathtest: triangle_test_c0 triangle_test_c1
+#	./triangle_test_c0
+#	gcov triangle.gcno
+	./triangle_test_c1
+	gcov -b triangle.gcno
