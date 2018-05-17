@@ -9,6 +9,7 @@ script:
   - make
   - make test
   - make gcov
+  - make pathtest
 branches:
   only:
     - master
