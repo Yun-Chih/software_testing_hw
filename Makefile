@@ -33,7 +33,7 @@ CXXFLAGS += -g -Wall -Wextra -pthread
 # All tests produced by this Makefile.  Remember to add new tests you
 # created to the list.
 TESTS = triangle_test nextdate_test commission_test
-PATHTESTS = triangle_test_c0 triangle_test_c1
+PATHTESTS = triangle_test_c0 triangle_test_c1 triangle_test_mcdc
 
 # All Google Test headers.  Usually you shouldn't change this
 # definition.
