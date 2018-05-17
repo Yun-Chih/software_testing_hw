@@ -132,8 +132,17 @@ triangle_test_c1.o : $(USER_DIR)/triangle_test_c1.cpp \
 triangle_test_c1 : triangle.o triangle_test_c1.o gtest_main.a
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) $(GCOVFLAGS) -lpthread $^ -o $@
 
-pathtest: triangle_test_c0 triangle_test_c1
-#	./triangle_test_c0
-#	gcov triangle.gcno
+triangle_test_mcdc.o : $(USER_DIR)/triangle_test_mcdc.cpp \
+                     $(USER_DIR)/triangle.h $(GTEST_HEADERS)
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $(USER_DIR)/triangle_test_mcdc.cpp
+
+triangle_test_mcdc : triangle.o triangle_test_mcdc.o gtest_main.a
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) $(GCOVFLAGS) -lpthread $^ -o $@
+
+pathtest: triangle_test_c0 triangle_test_c1 triangle_test_mcdc
+	./triangle_test_c0
+	gcov triangle.gcno
 	./triangle_test_c1
+	gcov -b triangle.gcno
+	./triangle_test_mcdc
 	gcov -b triangle.gcno

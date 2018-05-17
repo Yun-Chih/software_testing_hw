@@ -1,0 +1,57 @@
+        -:    0:Source:triangle.cpp
+        -:    0:Graph:triangle.gcno
+        -:    0:Data:triangle.gcda
+        -:    0:Runs:3
+        -:    0:Programs:1
+        -:    1:#include "triangle.h"
+        -:    2://#include <iostream>
+        -:    3:
+function _Z8Triangleiii called 21 returned 100% blocks executed 100%
+       21:    4:const char* Triangle(int a, int b, int c) {
+        -:    5:  int tmp;
+       21:    6:  if ( a > b) { 
+branch  0 taken 14% (fallthrough)
+branch  1 taken 86%
+        3:    7:    tmp = b;
+        3:    8:    b = a;
+        3:    9:    a = tmp;
+        -:   10:  }
+       21:   11:  if ( b > c) {
+branch  0 taken 14% (fallthrough)
+branch  1 taken 86%
+        3:   12:    tmp = c;
+        3:   13:    c = b;
+        3:   14:    b = tmp;
+        -:   15:  }
+       21:   16:  if ( a > b) {
+branch  0 taken 14% (fallthrough)
+branch  1 taken 86%
+        3:   17:    tmp = b;
+        3:   18:    b = a;
+        3:   19:    a = tmp;
+        -:   20:  }
+        -:   21:
+        -:   22:  //std::cout <<"var: " << a << b << c << std::endl;
+       21:   23:  if ( a < 1 || c > 200 || a + b <= c ) return "Not a triangle";
+branch  0 taken 81% (fallthrough)
+branch  1 taken 19%
+branch  2 taken 76% (fallthrough)
+branch  3 taken 24%
+branch  4 taken 15% (fallthrough)
+branch  5 taken 85%
+        -:   24:
+       11:   25:  else if ( c == b && b == a ) return "Equilateral";
+branch  0 taken 45% (fallthrough)
+branch  1 taken 55%
+branch  2 taken 60% (fallthrough)
+branch  3 taken 40%
+        -:   26:
+        8:   27:  else if ( c != b && b != a ) return "Scalene";
+branch  0 taken 75% (fallthrough)
+branch  1 taken 25%
+branch  2 taken 50% (fallthrough)
+branch  3 taken 50%
+        -:   28:
+        5:   29:  else return "Isosceles";
+        -:   30:
+        -:   31:}
