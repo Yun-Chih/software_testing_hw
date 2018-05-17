@@ -33,7 +33,7 @@ CXXFLAGS += -g -Wall -Wextra -pthread
 # All tests produced by this Makefile.  Remember to add new tests you
 # created to the list.
 TESTS = triangle_test nextdate_test commission_test
-PATHTESTS = triangle_test_c0 triangle_test_c1 triangle_test_mcdc
+PATHTESTS = triangle_test_c0 triangle_test_c1 triangle_test_mcdc nextdate_test_c0 nextdate_test_c1 commission_test_c0 commission_test_c1
 
 # All Google Test headers.  Usually you shouldn't change this
 # definition.
@@ -139,10 +139,46 @@ triangle_test_mcdc.o : $(USER_DIR)/triangle_test_mcdc.cpp \
 triangle_test_mcdc : triangle.o triangle_test_mcdc.o gtest_main.a
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) $(GCOVFLAGS) -lpthread $^ -o $@
 
-pathtest: triangle_test_c0 triangle_test_c1 triangle_test_mcdc
+nextdate_test_c0.o : $(USER_DIR)/nextdate_test_c0.cpp \
+                     $(USER_DIR)/nextdate.h $(GTEST_HEADERS)
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $(USER_DIR)/nextdate_test_c0.cpp
+
+nextdate_test_c0 : nextdate.o nextdate_test_c0.o gtest_main.a
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) $(GCOVFLAGS) -lpthread $^ -o $@
+
+nextdate_test_c1.o : $(USER_DIR)/nextdate_test_c1.cpp \
+                     $(USER_DIR)/nextdate.h $(GTEST_HEADERS)
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $(USER_DIR)/nextdate_test_c1.cpp
+
+nextdate_test_c1 : nextdate.o nextdate_test_c1.o gtest_main.a
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) $(GCOVFLAGS) -lpthread $^ -o $@
+
+commission_test_c0.o : $(USER_DIR)/commission_test_c0.cpp \
+                     $(USER_DIR)/commission.h $(GTEST_HEADERS)
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $(USER_DIR)/commission_test_c0.cpp
+
+commission_test_c0 : commission.o commission_test_c0.o gtest_main.a
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) $(GCOVFLAGS) -lpthread $^ -o $@
+
+commission_test_c1.o : $(USER_DIR)/commission_test_c1.cpp \
+                     $(USER_DIR)/commission.h $(GTEST_HEADERS)
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $(USER_DIR)/commission_test_c1.cpp
+
+commission_test_c1 : commission.o commission_test_c1.o gtest_main.a
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) $(GCOVFLAGS) -lpthread $^ -o $@
+
+pathtest: triangle_test_c0 triangle_test_c1 triangle_test_mcdc nextdate_test_c0 nextdate_test_c1 commission_test_c0 commission_test_c1
 	./triangle_test_c0
 	gcov triangle.gcno
 	./triangle_test_c1
 	gcov -b triangle.gcno
 	./triangle_test_mcdc
 	gcov -b triangle.gcno
+	./nextdate_test_c0
+	gcov nextdate.gcno
+	./nextdate_test_c1
+	gcov -b nextdate.gcno
+	./commission_test_c0
+	gcov commission.gcno
+	./commission_test_c1
+	gcov -b commission.gcno
